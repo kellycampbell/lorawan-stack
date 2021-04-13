@@ -1201,6 +1201,7 @@ type CreateGatewayAPIKeyRequest struct {
 	GatewayIdentifiers   `protobuf:"bytes,1,opt,name=gateway_ids,json=gatewayIds,proto3,embedded=gateway_ids" json:"gateway_ids"`
 	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Rights               []Right  `protobuf:"varint,3,rep,packed,name=rights,proto3,enum=ttn.lorawan.v3.Right" json:"rights,omitempty"`
+	Expiry               string   `protobuf:"bytes,4,opt,name=expiry,proto3" json:"expiry,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
@@ -1249,6 +1250,13 @@ func (m *CreateGatewayAPIKeyRequest) GetRights() []Right {
 		return m.Rights
 	}
 	return nil
+}
+
+func (m *CreateGatewayAPIKeyRequest) GetExpiry() string {
+	if m != nil {
+		return m.Expiry
+	}
+	return ""
 }
 
 type UpdateGatewayAPIKeyRequest struct {
@@ -2770,6 +2778,9 @@ func (this *CreateGatewayAPIKeyRequest) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if this.Expiry != that1.Expiry {
+		return false
+	}
 	return true
 }
 func (this *UpdateGatewayAPIKeyRequest) Equal(that interface{}) bool {
@@ -4169,6 +4180,13 @@ func (m *CreateGatewayAPIKeyRequest) MarshalToSizedBuffer(dAtA []byte) (int, err
 	_ = i
 	var l int
 	_ = l
+	if len(m.Expiry) > 0 {
+		i -= len(m.Expiry)
+		copy(dAtA[i:], m.Expiry)
+		i = encodeVarintGateway(dAtA, i, uint64(len(m.Expiry)))
+		i--
+		dAtA[i] = 0x22
+	}
 	if len(m.Rights) > 0 {
 		dAtA26 := make([]byte, len(m.Rights)*10)
 		var j25 int
@@ -5029,6 +5047,7 @@ func NewPopulatedCreateGatewayAPIKeyRequest(r randyGateway, easy bool) *CreateGa
 	for i := 0; i < v23; i++ {
 		this.Rights[i] = Right([]int32{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 56, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 57, 58, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55}[r.Intn(59)])
 	}
+	this.Expiry = randStringGateway(r)
 	if !easy && r.Intn(10) != 0 {
 	}
 	return this
@@ -5699,6 +5718,10 @@ func (m *CreateGatewayAPIKeyRequest) Size() (n int) {
 		}
 		n += 1 + sovGateway(uint64(l)) + l
 	}
+	l = len(m.Expiry)
+	if l > 0 {
+		n += 1 + l + sovGateway(uint64(l))
+	}
 	return n
 }
 
@@ -6173,6 +6196,7 @@ func (this *CreateGatewayAPIKeyRequest) String() string {
 		`GatewayIdentifiers:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.GatewayIdentifiers), "GatewayIdentifiers", "GatewayIdentifiers", 1), `&`, ``, 1) + `,`,
 		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
 		`Rights:` + fmt.Sprintf("%v", this.Rights) + `,`,
+		`Expiry:` + fmt.Sprintf("%v", this.Expiry) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -9557,6 +9581,38 @@ func (m *CreateGatewayAPIKeyRequest) Unmarshal(dAtA []byte) error {
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Rights", wireType)
 			}
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Expiry", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGateway
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGateway
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGateway
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Expiry = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipGateway(dAtA[iNdEx:])

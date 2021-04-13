@@ -518,6 +518,7 @@ type CreateApplicationAPIKeyRequest struct {
 	ApplicationIdentifiers `protobuf:"bytes,1,opt,name=application_ids,json=applicationIds,proto3,embedded=application_ids" json:"application_ids"`
 	Name                   string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Rights                 []Right  `protobuf:"varint,3,rep,packed,name=rights,proto3,enum=ttn.lorawan.v3.Right" json:"rights,omitempty"`
+	Expiry                 string   `protobuf:"bytes,4,opt,name=expiry,proto3" json:"expiry,omitempty"`
 	XXX_NoUnkeyedLiteral   struct{} `json:"-"`
 	XXX_sizecache          int32    `json:"-"`
 }
@@ -566,6 +567,13 @@ func (m *CreateApplicationAPIKeyRequest) GetRights() []Right {
 		return m.Rights
 	}
 	return nil
+}
+
+func (m *CreateApplicationAPIKeyRequest) GetExpiry() string {
+	if m != nil {
+		return m.Expiry
+	}
+	return ""
 }
 
 type UpdateApplicationAPIKeyRequest struct {
@@ -1161,6 +1169,9 @@ func (this *CreateApplicationAPIKeyRequest) Equal(that interface{}) bool {
 			return false
 		}
 	}
+	if this.Expiry != that1.Expiry {
+		return false
+	}
 	return true
 }
 func (this *UpdateApplicationAPIKeyRequest) Equal(that interface{}) bool {
@@ -1721,6 +1732,13 @@ func (m *CreateApplicationAPIKeyRequest) MarshalToSizedBuffer(dAtA []byte) (int,
 	_ = i
 	var l int
 	_ = l
+	if len(m.Expiry) > 0 {
+		i -= len(m.Expiry)
+		copy(dAtA[i:], m.Expiry)
+		i = encodeVarintApplication(dAtA, i, uint64(len(m.Expiry)))
+		i--
+		dAtA[i] = 0x22
+	}
 	if len(m.Rights) > 0 {
 		dAtA16 := make([]byte, len(m.Rights)*10)
 		var j15 int
@@ -2068,6 +2086,7 @@ func NewPopulatedCreateApplicationAPIKeyRequest(r randyApplication, easy bool) *
 	for i := 0; i < v17; i++ {
 		this.Rights[i] = Right([]int32{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 56, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 57, 58, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55}[r.Intn(59)])
 	}
+	this.Expiry = randStringApplication(r)
 	if !easy && r.Intn(10) != 0 {
 	}
 	return this
@@ -2363,6 +2382,10 @@ func (m *CreateApplicationAPIKeyRequest) Size() (n int) {
 		}
 		n += 1 + sovApplication(uint64(l)) + l
 	}
+	l = len(m.Expiry)
+	if l > 0 {
+		n += 1 + l + sovApplication(uint64(l))
+	}
 	return n
 }
 
@@ -2554,6 +2577,7 @@ func (this *CreateApplicationAPIKeyRequest) String() string {
 		`ApplicationIdentifiers:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.ApplicationIdentifiers), "ApplicationIdentifiers", "ApplicationIdentifiers", 1), `&`, ``, 1) + `,`,
 		`Name:` + fmt.Sprintf("%v", this.Name) + `,`,
 		`Rights:` + fmt.Sprintf("%v", this.Rights) + `,`,
+		`Expiry:` + fmt.Sprintf("%v", this.Expiry) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -4085,6 +4109,38 @@ func (m *CreateApplicationAPIKeyRequest) Unmarshal(dAtA []byte) error {
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Rights", wireType)
 			}
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Expiry", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowApplication
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthApplication
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthApplication
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Expiry = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipApplication(dAtA[iNdEx:])
