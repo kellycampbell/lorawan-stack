@@ -1313,6 +1313,24 @@
       "file": "end_devices.go"
     }
   },
+  "error:cmd/ttn-lw-cli/commands:expiry_date_format_invalid": {
+    "translations": {
+      "en": "invalid expiry date format (use YYYY-MM-DD)"
+    },
+    "description": {
+      "package": "cmd/ttn-lw-cli/commands",
+      "file": "flags.go"
+    }
+  },
+  "error:cmd/ttn-lw-cli/commands:expiry_date_invalid": {
+    "translations": {
+      "en": "expiry date is in the past"
+    },
+    "description": {
+      "package": "cmd/ttn-lw-cli/commands",
+      "file": "flags.go"
+    }
+  },
   "error:cmd/ttn-lw-cli/commands:fail_write": {
     "translations": {
       "en": "failed to write `{file}`"
@@ -1698,6 +1716,24 @@
     "description": {
       "package": "cmd/ttn-lw-cli/internal/util",
       "file": "flags.go"
+    }
+  },
+  "error:cmd/ttn-lw-stack/commands:expiry_date_format_invalid": {
+    "translations": {
+      "en": "invalid expiry date format (use YYYY-MM-DD)"
+    },
+    "description": {
+      "package": "cmd/ttn-lw-stack/commands",
+      "file": "is_db_create_api_key.go"
+    }
+  },
+  "error:cmd/ttn-lw-stack/commands:expiry_date_invalid": {
+    "translations": {
+      "en": "expiry date is in the past"
+    },
+    "description": {
+      "package": "cmd/ttn-lw-stack/commands",
+      "file": "is_db_create_api_key.go"
     }
   },
   "error:cmd/ttn-lw-stack/commands:missing_flag": {
@@ -5100,15 +5136,6 @@
     "description": {
       "package": "pkg/identityserver",
       "file": "picture.go"
-    }
-  },
-  "error:pkg/identityserver:expiry_date_format_invalid": {
-    "translations": {
-      "en": "invalid expiry date format (use YYYY-MM-DD)"
-    },
-    "description": {
-      "package": "pkg/identityserver",
-      "file": "api_key_utils.go"
     }
   },
   "error:pkg/identityserver:expiry_date_invalid": {
