@@ -358,7 +358,6 @@ func (is *IdentityServer) RequireAuthenticated(ctx context.Context) error {
 		}
 	}
 	if apiKey := authInfo.GetAPIKey(); apiKey != nil {
-
 		return nil
 	} else if accessToken := authInfo.GetOAuthAccessToken(); accessToken != nil {
 		return nil

@@ -87,7 +87,7 @@ func init() {
 				},
 				&ttnpb.APIKey{
 					Name:      "expired key",
-					Rights:    []ttnpb.Right{ttnpb.RIGHT_SEND_INVITES},
+					Rights:    []ttnpb.Right{ttnpb.RIGHT_USER_ALL},
 					ExpiresAt: &expiredTime,
 				},
 			)

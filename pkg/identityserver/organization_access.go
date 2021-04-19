@@ -85,7 +85,7 @@ func (is *IdentityServer) createOrganizationAPIKey(ctx context.Context, req *ttn
 	if err = rights.RequireOrganization(ctx, req.OrganizationIdentifiers, req.Rights...); err != nil {
 		return nil, err
 	}
-	key, token, err := GenerateAPIKey(ctx, req.Name, req.Expiry, req.Rights...)
+	key, token, err := GenerateAPIKey(ctx, req.Name, req.ExpiresAt, req.Rights...)
 	if err != nil {
 		return nil, err
 	}

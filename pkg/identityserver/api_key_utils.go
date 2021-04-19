@@ -32,21 +32,9 @@ var apiKeyHashSettings auth.HashValidator = pbkdf2.PBKDF2{
 }
 
 var errExpiryDateInPast = errors.DefineInvalidArgument("expiry_date_invalid", "expiry date is in the past")
-var errInvalidDateFormat = errors.DefineInvalidArgument("expiry_date_format_invalid", "invalid expiry date format (use YYYY-MM-DD)")
-
-func parseAndValidateAPIKeyExpiry(expiry string) (*time.Time, error) {
-	expiryDate, err := time.Parse("2006-01-02", expiry)
-	if err != nil {
-		return nil, errInvalidDateFormat
-	}
-	if expiryDate.Before(time.Now()) {
-		return nil, errExpiryDateInPast
-	}
-	return &expiryDate, nil
-}
 
 // GenerateAPIKey generates a new API key with the given name for the set of rights
-func GenerateAPIKey(ctx context.Context, name string, expiry string, rights ...ttnpb.Right) (key *ttnpb.APIKey, token string, err error) {
+func GenerateAPIKey(ctx context.Context, name string, expiresAt *time.Time, rights ...ttnpb.Right) (key *ttnpb.APIKey, token string, err error) {
 	token, err = auth.APIKey.Generate(ctx, "")
 	if err != nil {
 		return nil, "", err
@@ -59,17 +47,17 @@ func GenerateAPIKey(ctx context.Context, name string, expiry string, rights ...t
 	if err != nil {
 		return nil, "", err
 	}
-	if expiry != "" {
-		expiryDate, err := parseAndValidateAPIKeyExpiry(expiry)
-		if err != nil {
-			return nil, "", err
+	// Check that expiry date passed is not a zero time or nil value
+	if expiresAt != nil && !expiresAt.IsZero() {
+		if expiresAt.Before(time.Now()) { // Check if an expired date is passed.
+			return nil, "", errExpiryDateInPast
 		}
 		key = &ttnpb.APIKey{
 			ID:        generatedID,
 			Key:       hashedKey,
 			Name:      name,
 			Rights:    rights,
-			ExpiresAt: expiryDate,
+			ExpiresAt: expiresAt,
 		}
 	} else {
 		key = &ttnpb.APIKey{
