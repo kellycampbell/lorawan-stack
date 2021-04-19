@@ -291,22 +291,14 @@
               }
             },
             {
-              "name": "expiry",
+              "name": "expires_at",
               "description": "",
               "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
+              "type": "Timestamp",
+              "longType": "google.protobuf.Timestamp",
+              "fullType": "google.protobuf.Timestamp",
               "ismap": false,
-              "defaultValue": "",
-              "options": {
-                "validate.rules": [
-                  {
-                    "name": "string.pattern",
-                    "value": "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
-                  }
-                ]
-              }
+              "defaultValue": ""
             }
           ]
         },
@@ -13803,22 +13795,14 @@
               }
             },
             {
-              "name": "expiry",
+              "name": "expires_at",
               "description": "",
               "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
+              "type": "Timestamp",
+              "longType": "google.protobuf.Timestamp",
+              "fullType": "google.protobuf.Timestamp",
               "ismap": false,
-              "defaultValue": "",
-              "options": {
-                "validate.rules": [
-                  {
-                    "name": "string.pattern",
-                    "value": "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
-                  }
-                ]
-              }
+              "defaultValue": ""
             }
           ]
         },
@@ -27012,22 +26996,14 @@
               }
             },
             {
-              "name": "expiry",
+              "name": "expires_at",
               "description": "",
               "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
+              "type": "Timestamp",
+              "longType": "google.protobuf.Timestamp",
+              "fullType": "google.protobuf.Timestamp",
               "ismap": false,
-              "defaultValue": "",
-              "options": {
-                "validate.rules": [
-                  {
-                    "name": "string.pattern",
-                    "value": "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
-                  }
-                ]
-              }
+              "defaultValue": ""
             }
           ]
         },
@@ -32051,22 +32027,14 @@
               }
             },
             {
-              "name": "expiry",
+              "name": "expires_at",
               "description": "",
               "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
+              "type": "Timestamp",
+              "longType": "google.protobuf.Timestamp",
+              "fullType": "google.protobuf.Timestamp",
               "ismap": false,
-              "defaultValue": "",
-              "options": {
-                "validate.rules": [
-                  {
-                    "name": "string.pattern",
-                    "value": "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
-                  }
-                ]
-              }
+              "defaultValue": ""
             }
           ]
         },

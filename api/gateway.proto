@@ -247,7 +247,7 @@ message CreateGatewayAPIKeyRequest {
       items: { enum: { defined_only: true } }
     }
   ];
-  string expiry = 4 [(validate.rules).string = {pattern: "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"}];
+  google.protobuf.Timestamp expires_at = 4 [(gogoproto.stdtime) = true];
 }
 
 message UpdateGatewayAPIKeyRequest {

@@ -928,7 +928,7 @@ Application is the message that defines an Application in the network.
 | `application_ids` | [`ApplicationIdentifiers`](#ttn.lorawan.v3.ApplicationIdentifiers) |  |  |
 | `name` | [`string`](#string) |  |  |
 | `rights` | [`Right`](#ttn.lorawan.v3.Right) | repeated |  |
-| `expiry` | [`string`](#string) |  |  |
+| `expires_at` | [`google.protobuf.Timestamp`](#google.protobuf.Timestamp) |  |  |
 
 #### Field Rules
 
@@ -936,7 +936,11 @@ Application is the message that defines an Application in the network.
 | ----- | ----------- |
 | `application_ids` | <p>`message.required`: `true`</p> |
 | `name` | <p>`string.max_len`: `50`</p> |
+<<<<<<< HEAD
 | `rights` | <p>`repeated.min_items`: `1`</p><p>`repeated.unique`: `true`</p><p>`repeated.items.enum.defined_only`: `true`</p> |
+=======
+| `rights` | <p>`repeated.items.enum.defined_only`: `true`</p> |
+>>>>>>> 2dd1feed4 (fixup! is: Add expiry date field to protos)
 
 ### <a name="ttn.lorawan.v3.CreateApplicationRequest">Message `CreateApplicationRequest`</a>
 
@@ -3770,7 +3774,7 @@ The Events service serves events from the cluster.
 | `gateway_ids` | [`GatewayIdentifiers`](#ttn.lorawan.v3.GatewayIdentifiers) |  |  |
 | `name` | [`string`](#string) |  |  |
 | `rights` | [`Right`](#ttn.lorawan.v3.Right) | repeated |  |
-| `expiry` | [`string`](#string) |  |  |
+| `expires_at` | [`google.protobuf.Timestamp`](#google.protobuf.Timestamp) |  |  |
 
 #### Field Rules
 
@@ -3778,7 +3782,11 @@ The Events service serves events from the cluster.
 | ----- | ----------- |
 | `gateway_ids` | <p>`message.required`: `true`</p> |
 | `name` | <p>`string.max_len`: `50`</p> |
+<<<<<<< HEAD
 | `rights` | <p>`repeated.min_items`: `1`</p><p>`repeated.unique`: `true`</p><p>`repeated.items.enum.defined_only`: `true`</p> |
+=======
+| `rights` | <p>`repeated.items.enum.defined_only`: `true`</p> |
+>>>>>>> 2dd1feed4 (fixup! is: Add expiry date field to protos)
 
 ### <a name="ttn.lorawan.v3.CreateGatewayRequest">Message `CreateGatewayRequest`</a>
 
@@ -6816,7 +6824,7 @@ is used to manage OAuth client authorizations for users.
 | `organization_ids` | [`OrganizationIdentifiers`](#ttn.lorawan.v3.OrganizationIdentifiers) |  |  |
 | `name` | [`string`](#string) |  |  |
 | `rights` | [`Right`](#ttn.lorawan.v3.Right) | repeated |  |
-| `expiry` | [`string`](#string) |  |  |
+| `expires_at` | [`google.protobuf.Timestamp`](#google.protobuf.Timestamp) |  |  |
 
 #### Field Rules
 
@@ -6824,7 +6832,11 @@ is used to manage OAuth client authorizations for users.
 | ----- | ----------- |
 | `organization_ids` | <p>`message.required`: `true`</p> |
 | `name` | <p>`string.max_len`: `50`</p> |
+<<<<<<< HEAD
 | `rights` | <p>`repeated.min_items`: `1`</p><p>`repeated.unique`: `true`</p><p>`repeated.items.enum.defined_only`: `true`</p> |
+=======
+| `rights` | <p>`repeated.items.enum.defined_only`: `true`</p> |
+>>>>>>> 2dd1feed4 (fixup! is: Add expiry date field to protos)
 
 ### <a name="ttn.lorawan.v3.CreateOrganizationRequest">Message `CreateOrganizationRequest`</a>
 
@@ -7896,7 +7908,7 @@ Secret contains a secret value. It also contains the ID of the Encryption key us
 | `user_ids` | [`UserIdentifiers`](#ttn.lorawan.v3.UserIdentifiers) |  |  |
 | `name` | [`string`](#string) |  |  |
 | `rights` | [`Right`](#ttn.lorawan.v3.Right) | repeated |  |
-| `expiry` | [`string`](#string) |  |  |
+| `expires_at` | [`google.protobuf.Timestamp`](#google.protobuf.Timestamp) |  |  |
 
 #### Field Rules
 
@@ -7904,7 +7916,11 @@ Secret contains a secret value. It also contains the ID of the Encryption key us
 | ----- | ----------- |
 | `user_ids` | <p>`message.required`: `true`</p> |
 | `name` | <p>`string.max_len`: `50`</p> |
+<<<<<<< HEAD
 | `rights` | <p>`repeated.min_items`: `1`</p><p>`repeated.unique`: `true`</p><p>`repeated.items.enum.defined_only`: `true`</p> |
+=======
+| `rights` | <p>`repeated.items.enum.defined_only`: `true`</p> |
+>>>>>>> 2dd1feed4 (fixup! is: Add expiry date field to protos)
 
 ### <a name="ttn.lorawan.v3.CreateUserRequest">Message `CreateUserRequest`</a>
 

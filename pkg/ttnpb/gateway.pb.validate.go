@@ -2004,12 +2004,15 @@ func (m *CreateGatewayAPIKeyRequest) ValidateFields(paths ...string) error {
 
 			}
 
-		case "expiry":
+		case "expires_at":
 
-			if !_CreateGatewayAPIKeyRequest_Expiry_Pattern.MatchString(m.GetExpiry()) {
-				return CreateGatewayAPIKeyRequestValidationError{
-					field:  "expiry",
-					reason: "value does not match regex pattern \"^\\\\d{4}\\\\-(0?[1-9]|1[012])\\\\-(0?[1-9]|[12][0-9]|3[01])$\"",
+			if v, ok := interface{}(m.GetExpiresAt()).(interface{ ValidateFields(...string) error }); ok {
+				if err := v.ValidateFields(subs...); err != nil {
+					return CreateGatewayAPIKeyRequestValidationError{
+						field:  "expires_at",
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
 				}
 			}
 
@@ -2079,8 +2082,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CreateGatewayAPIKeyRequestValidationError{}
-
-var _CreateGatewayAPIKeyRequest_Expiry_Pattern = regexp.MustCompile("^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$")
 
 // ValidateFields checks the field values on UpdateGatewayAPIKeyRequest with
 // the rules defined in the proto definition for this message. If any rules

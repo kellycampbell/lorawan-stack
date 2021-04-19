@@ -1055,15 +1055,14 @@ func (dst *CreateGatewayAPIKeyRequest) SetFields(src *CreateGatewayAPIKeyRequest
 			} else {
 				dst.Rights = nil
 			}
-		case "expiry":
+		case "expires_at":
 			if len(subs) > 0 {
-				return fmt.Errorf("'expiry' has no subfields, but %s were specified", subs)
+				return fmt.Errorf("'expires_at' has no subfields, but %s were specified", subs)
 			}
 			if src != nil {
-				dst.Expiry = src.Expiry
+				dst.ExpiresAt = src.ExpiresAt
 			} else {
-				var zero string
-				dst.Expiry = zero
+				dst.ExpiresAt = nil
 			}
 
 		default:

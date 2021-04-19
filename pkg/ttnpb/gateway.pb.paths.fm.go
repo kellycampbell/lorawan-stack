@@ -342,7 +342,7 @@ var GetGatewayAPIKeyRequestFieldPathsTopLevel = []string{
 	"key_id",
 }
 var CreateGatewayAPIKeyRequestFieldPathsNested = []string{
-	"expiry",
+	"expires_at",
 	"gateway_ids",
 	"gateway_ids.eui",
 	"gateway_ids.gateway_id",
@@ -351,7 +351,7 @@ var CreateGatewayAPIKeyRequestFieldPathsNested = []string{
 }
 
 var CreateGatewayAPIKeyRequestFieldPathsTopLevel = []string{
-	"expiry",
+	"expires_at",
 	"gateway_ids",
 	"name",
 	"rights",
