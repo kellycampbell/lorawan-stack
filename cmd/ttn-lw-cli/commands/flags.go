@@ -119,8 +119,10 @@ func getRights(flagSet *pflag.FlagSet) (rights []ttnpb.Right) {
 }
 
 var (
-	errNoAPIKeyID     = errors.DefineInvalidArgument("no_api_key_id", "no API key ID set")
-	errNoAPIKeyRights = errors.DefineInvalidArgument("no_api_key_rights", "no API key rights set")
+	errNoAPIKeyID        = errors.DefineInvalidArgument("no_api_key_id", "no API key ID set")
+	errNoAPIKeyRights    = errors.DefineInvalidArgument("no_api_key_rights", "no API key rights set")
+	errExpiryDateInPast  = errors.DefineInvalidArgument("expiry_date_invalid", "expiry date is in the past")
+	errInvalidDateFormat = errors.DefineInvalidArgument("expiry_date_format_invalid", "invalid expiry date format (use YYYY-MM-DD)")
 )
 
 func getAPIKeyID(flagSet *pflag.FlagSet, args []string, i int) string {

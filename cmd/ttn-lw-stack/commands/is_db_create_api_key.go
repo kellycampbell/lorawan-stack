@@ -21,9 +21,15 @@ import (
 
 	"github.com/spf13/cobra"
 	"go.thethings.network/lorawan-stack/v3/cmd/internal/io"
+	"go.thethings.network/lorawan-stack/v3/pkg/errors"
 	is "go.thethings.network/lorawan-stack/v3/pkg/identityserver"
 	"go.thethings.network/lorawan-stack/v3/pkg/identityserver/store"
 	"go.thethings.network/lorawan-stack/v3/pkg/ttnpb"
+)
+
+var (
+	errExpiryDateInPast  = errors.DefineInvalidArgument("expiry_date_invalid", "expiry date is in the past")
+	errInvalidDateFormat = errors.DefineInvalidArgument("expiry_date_format_invalid", "invalid expiry date format (use YYYY-MM-DD)")
 )
 
 var (
@@ -47,12 +53,24 @@ var (
 			}
 			name, _ := cmd.Flags().GetString("name")
 			expiry, _ := cmd.Flags().GetString("expiry")
+			var expiryDate time.Time
+
+			if expiry != "" {
+				expiryDate, err := time.Parse("2006-01-02", expiry)
+				if err != nil {
+					return errInvalidDateFormat
+				}
+				if expiryDate.Before(time.Now()) {
+					return errExpiryDateInPast
+				}
+			}
+
 			usr := &ttnpb.User{
 				UserIdentifiers: ttnpb.UserIdentifiers{UserID: userID},
 			}
 			rights := []ttnpb.Right{ttnpb.RIGHT_ALL}
 			apiKeyStore := store.GetAPIKeyStore(db)
-			key, token, err := is.GenerateAPIKey(ctx, name, expiry, rights...)
+			key, token, err := is.GenerateAPIKey(ctx, name, &expiryDate, rights...)
 			if err != nil {
 				return err
 			}
@@ -74,6 +92,6 @@ var (
 func init() {
 	createAPIKeyCommand.Flags().String("user-id", "admin", "User ID")
 	createAPIKeyCommand.Flags().String("name", "admin-api-key", "API key name")
-	createAPIKeyCommand.Flags().String("expiry", "", "API key expiry date (YYYY-MM-DD)")
+	createAPIKeyCommand.Flags().String("expiry", "", "API key expiry date (YYYY-MM-DD) - only applicable when creating API Key")
 	isDBCommand.AddCommand(createAPIKeyCommand)
 }

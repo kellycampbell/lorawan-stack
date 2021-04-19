@@ -17,6 +17,7 @@ package commands
 import (
 	"os"
 	"strings"
+	"time"
 
 	"github.com/spf13/cobra"
 	"go.thethings.network/lorawan-stack/v3/cmd/internal/io"
@@ -250,7 +251,18 @@ var (
 				return errNoAPIKeyRights
 			}
 
-			expiry, _ := cmd.Flags().GetString("expiry")
+			expiry, _ := cmd.Flags().GetString("api-key-expiry")
+			var expiryDate time.Time
+
+			if expiry != "" {
+				expiryDate, err := time.Parse("2006-01-02", expiry)
+				if err != nil {
+					return errInvalidDateFormat
+				}
+				if expiryDate.Before(time.Now()) {
+					return errExpiryDateInPast
+				}
+			}
 
 			is, err := api.Dial(ctx, config.IdentityServerGRPCAddress)
 			if err != nil {
@@ -260,7 +272,7 @@ var (
 				OrganizationIdentifiers: *orgID,
 				Name:                    name,
 				Rights:                  rights,
-				Expiry:                  expiry,
+				ExpiresAt:               &expiryDate,
 			})
 			if err != nil {
 				return err
@@ -378,7 +390,7 @@ func init() {
 	organizationAPIKeys.AddCommand(organizationAPIKeysGet)
 	organizationAPIKeysCreate.Flags().String("name", "", "")
 	organizationAPIKeysCreate.Flags().AddFlagSet(organizationRightsFlags)
-	organizationAPIKeysCreate.Flags().String("expiry", "", "API key expiry date (YYYY-MM-DD)")
+	organizationAPIKeysCreate.Flags().String("api-key-expiry", "", "API key expiry date (YYYY-MM-DD) - only applicable when creating API Key")
 	organizationAPIKeys.AddCommand(organizationAPIKeysCreate)
 	organizationAPIKeysUpdate.Flags().String("api-key-id", "", "")
 	organizationAPIKeysUpdate.Flags().String("name", "", "")
