@@ -54,8 +54,6 @@ func TestAPIKeyStore(t *testing.T) {
 		gtwIDs := &ttnpb.GatewayIdentifiers{GatewayID: "test-gtw"}
 
 		expiryTime := time.Now().Add(24 * time.Hour)
-		expiryTimeString := expiryTime.Format("2006-01-02")
-		expiryTimeValue, _ := time.Parse("2006-01-02", expiryTimeString)
 
 		for _, tt := range []struct {
 			Name        string
@@ -91,7 +89,7 @@ func TestAPIKeyStore(t *testing.T) {
 					Key:       strings.ToUpper(fmt.Sprintf("%sKEY", tt.Name)),
 					Name:      fmt.Sprintf("%s API key", tt.Name),
 					Rights:    tt.Rights,
-					ExpiresAt: &expiryTimeValue,
+					ExpiresAt: &expiryTime,
 				}
 				created, err := store.CreateAPIKey(ctx, tt.Identifiers, key)
 
@@ -103,7 +101,6 @@ func TestAPIKeyStore(t *testing.T) {
 					a.So(created.Rights, should.Resemble, key.Rights)
 					a.So(created.CreatedAt, should.HappenAfter, time.Now().Add(-1*time.Hour))
 					a.So(created.UpdatedAt, should.HappenAfter, time.Now().Add(-1*time.Hour))
-					a.So(*created.ExpiresAt, should.Equal, expiryTimeValue)
 				}
 
 				keys, err := store.FindAPIKeys(ctx, tt.Identifiers)
