@@ -50,7 +50,6 @@ require (
 	github.com/getsentry/sentry-go v0.10.0
 	github.com/go-redis/redis/v8 v8.3.2
 	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
-	github.com/gobwas/glob v0.2.3
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/gddo v0.0.0-20200519224240-a4ebd2f7e574
 	github.com/golang/protobuf v1.3.5
