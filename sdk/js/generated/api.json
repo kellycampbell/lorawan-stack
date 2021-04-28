@@ -298,7 +298,15 @@
               "longType": "google.protobuf.Timestamp",
               "fullType": "google.protobuf.Timestamp",
               "ismap": false,
-              "defaultValue": ""
+              "defaultValue": "",
+              "options": {
+                "validate.rules": [
+                  {
+                    "name": "timestamp.gt_now",
+                    "value": true
+                  }
+                ]
+              }
             }
           ]
         },
@@ -13802,7 +13810,15 @@
               "longType": "google.protobuf.Timestamp",
               "fullType": "google.protobuf.Timestamp",
               "ismap": false,
-              "defaultValue": ""
+              "defaultValue": "",
+              "options": {
+                "validate.rules": [
+                  {
+                    "name": "timestamp.gt_now",
+                    "value": true
+                  }
+                ]
+              }
             }
           ]
         },
@@ -27003,7 +27019,15 @@
               "longType": "google.protobuf.Timestamp",
               "fullType": "google.protobuf.Timestamp",
               "ismap": false,
-              "defaultValue": ""
+              "defaultValue": "",
+              "options": {
+                "validate.rules": [
+                  {
+                    "name": "timestamp.gt_now",
+                    "value": true
+                  }
+                ]
+              }
             }
           ]
         },
@@ -30255,7 +30279,15 @@
               "longType": "google.protobuf.Timestamp",
               "fullType": "google.protobuf.Timestamp",
               "ismap": false,
-              "defaultValue": ""
+              "defaultValue": "",
+              "options": {
+                "validate.rules": [
+                  {
+                    "name": "timestamp.gt_now",
+                    "value": true
+                  }
+                ]
+              }
             }
           ]
         },
@@ -32034,7 +32066,15 @@
               "longType": "google.protobuf.Timestamp",
               "fullType": "google.protobuf.Timestamp",
               "ismap": false,
-              "defaultValue": ""
+              "defaultValue": "",
+              "options": {
+                "validate.rules": [
+                  {
+                    "name": "timestamp.gt_now",
+                    "value": true
+                  }
+                ]
+              }
             }
           ]
         },

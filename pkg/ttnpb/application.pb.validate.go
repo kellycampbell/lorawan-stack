@@ -1062,14 +1062,17 @@ func (m *CreateApplicationAPIKeyRequest) ValidateFields(paths ...string) error {
 
 		case "expires_at":
 
-			if v, ok := interface{}(m.GetExpiresAt()).(interface{ ValidateFields(...string) error }); ok {
-				if err := v.ValidateFields(subs...); err != nil {
+			if ts := m.GetExpiresAt(); ts != nil {
+
+				now := time.Now()
+
+				if ts.Sub(now) <= 0 {
 					return CreateApplicationAPIKeyRequestValidationError{
 						field:  "expires_at",
-						reason: "embedded message failed validation",
-						cause:  err,
+						reason: "value must be greater than now",
 					}
 				}
+
 			}
 
 		default:

@@ -117,7 +117,7 @@ message CreateApplicationAPIKeyRequest {
       items: { enum: { defined_only: true } }
     }
   ];
-  google.protobuf.Timestamp expires_at = 4 [(gogoproto.stdtime) = true];
+  google.protobuf.Timestamp expires_at = 4 [(gogoproto.stdtime) = true, (validate.rules).timestamp.gt_now = true];
 }
 
 message UpdateApplicationAPIKeyRequest {
