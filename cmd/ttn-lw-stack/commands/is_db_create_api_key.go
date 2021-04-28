@@ -16,6 +16,7 @@ package commands
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"time"
 
@@ -52,11 +53,14 @@ var (
 				return err
 			}
 			name, _ := cmd.Flags().GetString("name")
-			expiry, _ := cmd.Flags().GetString("expiry")
+
+			expiry, _ := cmd.Flags().GetString("api-key-expiry")
 			var expiryDate time.Time
 
 			if expiry != "" {
-				expiryDate, err := time.Parse("2006-01-02", expiry)
+				t := time.Now()
+				zone, _ := t.Zone()
+				expiryDate, err := time.Parse("2006-01-02:15:04 MST", fmt.Sprintf("%s %s", expiry, zone))
 				if err != nil {
 					return errInvalidDateFormat
 				}
@@ -92,6 +96,6 @@ var (
 func init() {
 	createAPIKeyCommand.Flags().String("user-id", "admin", "User ID")
 	createAPIKeyCommand.Flags().String("name", "admin-api-key", "API key name")
-	createAPIKeyCommand.Flags().String("expiry", "", "API key expiry date (YYYY-MM-DD) - only applicable when creating API Key")
+	createAPIKeyCommand.Flags().String("api-key-expiry", "", "API key expiry date (YYYY-MM-DD)")
 	isDBCommand.AddCommand(createAPIKeyCommand)
 }

@@ -122,7 +122,7 @@ var (
 	errNoAPIKeyID        = errors.DefineInvalidArgument("no_api_key_id", "no API key ID set")
 	errNoAPIKeyRights    = errors.DefineInvalidArgument("no_api_key_rights", "no API key rights set")
 	errExpiryDateInPast  = errors.DefineInvalidArgument("expiry_date_invalid", "expiry date is in the past")
-	errInvalidDateFormat = errors.DefineInvalidArgument("expiry_date_format_invalid", "invalid expiry date format (use YYYY-MM-DD)")
+	errInvalidDateFormat = errors.DefineInvalidArgument("expiry_date_format_invalid", "invalid expiry date format (use YYYY-MM-DD:HH:mm)")
 )
 
 func getAPIKeyID(flagSet *pflag.FlagSet, args []string, i int) string {
@@ -136,6 +136,24 @@ func getAPIKeyID(flagSet *pflag.FlagSet, args []string, i int) string {
 		apiKeyID, _ = flagSet.GetString("api-key-id")
 	}
 	return apiKeyID
+}
+
+func getAPIKeyExpiry(flagSet *pflag.FlagSet) (time.Time, error) {
+	expiry, _ := flagSet.GetString("api-key-expiry")
+	var expiryDate time.Time
+	if expiry != "" {
+		t := time.Now()
+		zone, _ := t.Zone()
+
+		expiryDate, err := time.Parse("2006-01-02:15:04 MST", fmt.Sprintf("%s %s", expiry, zone))
+		if err != nil {
+			return expiryDate, errInvalidDateFormat
+		}
+		if expiryDate.Before(time.Now()) {
+			return expiryDate, errExpiryDateInPast
+		}
+	}
+	return expiryDate, nil
 }
 
 var searchFlags = func() *pflag.FlagSet {

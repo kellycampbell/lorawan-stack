@@ -15,8 +15,6 @@
 package commands
 
 import (
-	"time"
-
 	"github.com/spf13/cobra"
 	"go.thethings.network/lorawan-stack/v3/cmd/ttn-lw-cli/internal/api"
 	"go.thethings.network/lorawan-stack/v3/pkg/ttnpb"
@@ -40,17 +38,9 @@ key is provided, a new API key will be created.`,
 				return errNoApplicationID
 			}
 
-			expiry, _ := cmd.Flags().GetString("api-key-expiry")
-			var expiryDate time.Time
-
-			if expiry != "" {
-				expiryDate, err := time.Parse("2006-01-02", expiry)
-				if err != nil {
-					return errInvalidDateFormat
-				}
-				if expiryDate.Before(time.Now()) {
-					return errExpiryDateInPast
-				}
+			expiryDate, err := getAPIKeyExpiry(cmd.Flags())
+			if err != nil {
+				return err
 			}
 
 			key, _ := cmd.Flags().GetString("api-key")
@@ -63,10 +53,12 @@ key is provided, a new API key will be created.`,
 				apiKey, err := ttnpb.NewApplicationAccessClient(is).CreateAPIKey(ctx, &ttnpb.CreateApplicationAPIKeyRequest{
 					ApplicationIdentifiers: *appID,
 					Name:                   "Device Claiming",
-					Rights: []ttnpb.Right{ttnpb.RIGHT_APPLICATION_DEVICES_READ,
+					Rights: []ttnpb.Right{
+						ttnpb.RIGHT_APPLICATION_DEVICES_READ,
 						ttnpb.RIGHT_APPLICATION_DEVICES_READ_KEYS,
 						ttnpb.RIGHT_APPLICATION_DEVICES_WRITE,
-						ttnpb.RIGHT_APPLICATION_DEVICES_WRITE_KEYS},
+						ttnpb.RIGHT_APPLICATION_DEVICES_WRITE_KEYS,
+					},
 					ExpiresAt: &expiryDate,
 				})
 
@@ -111,7 +103,7 @@ key is provided, a new API key will be created.`,
 
 func init() {
 	applicationClaimAuthorize.Flags().String("api-key", "", "")
-	applicationClaimAuthorize.Flags().String("api-key-expiry", "", "API key expiry date (YYYY-MM-DD) - only applicable when creating API Key")
+	applicationClaimAuthorize.Flags().String("api-key-expiry", "", "API key expiry date (YYYY-MM-DD:HH:mm) - only applicable when creating API Key")
 	applicationClaim.AddCommand(applicationClaimAuthorize)
 	applicationClaim.AddCommand(applicationClaimUnauthorize)
 	applicationClaim.PersistentFlags().AddFlagSet(applicationIDFlags())
