@@ -297,6 +297,11 @@ var (
 				return errNoAPIKeyRights
 			}
 
+			expiryDate, err := getAPIKeyExpiry(cmd.Flags())
+			if err != nil {
+				return err
+			}
+
 			is, err := api.Dial(ctx, config.IdentityServerGRPCAddress)
 			if err != nil {
 				return err
@@ -304,9 +309,10 @@ var (
 			_, err = ttnpb.NewGatewayAccessClient(is).UpdateAPIKey(ctx, &ttnpb.UpdateGatewayAPIKeyRequest{
 				GatewayIdentifiers: *gtwID,
 				APIKey: ttnpb.APIKey{
-					ID:     id,
-					Name:   name,
-					Rights: rights,
+					ID:        id,
+					Name:      name,
+					Rights:    rights,
+					ExpiresAt: &expiryDate,
 				},
 			})
 			if err != nil {
@@ -376,11 +382,12 @@ func init() {
 	gatewayAPIKeys.AddCommand(gatewayAPIKeysGet)
 	gatewayAPIKeysCreate.Flags().String("name", "", "")
 	gatewayAPIKeysCreate.Flags().AddFlagSet(gatewayRightsFlags)
-	gatewayAPIKeysCreate.Flags().String("api-key-expiry", "", "API key expiry date (YYYY-MM-DD)")
+	gatewayAPIKeysCreate.Flags().String("api-key-expiry", "", "API key expiry date (YYYY-MM-DD:HH:mm)")
 	gatewayAPIKeys.AddCommand(gatewayAPIKeysCreate)
 	gatewayAPIKeysUpdate.Flags().String("api-key-id", "", "")
 	gatewayAPIKeysUpdate.Flags().String("name", "", "")
 	gatewayAPIKeysUpdate.Flags().AddFlagSet(gatewayRightsFlags)
+	gatewayAPIKeysUpdate.Flags().String("api-key-expiry", "", "API key expiry date (YYYY-MM-DD:HH:mm)")
 	gatewayAPIKeys.AddCommand(gatewayAPIKeysUpdate)
 	gatewayAPIKeysDelete.Flags().String("api-key-id", "", "")
 	gatewayAPIKeys.AddCommand(gatewayAPIKeysDelete)

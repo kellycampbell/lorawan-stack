@@ -297,6 +297,11 @@ var (
 				return errNoAPIKeyRights
 			}
 
+			expiryDate, err := getAPIKeyExpiry(cmd.Flags())
+			if err != nil {
+				return err
+			}
+
 			is, err := api.Dial(ctx, config.IdentityServerGRPCAddress)
 			if err != nil {
 				return err
@@ -304,9 +309,10 @@ var (
 			_, err = ttnpb.NewOrganizationAccessClient(is).UpdateAPIKey(ctx, &ttnpb.UpdateOrganizationAPIKeyRequest{
 				OrganizationIdentifiers: *orgID,
 				APIKey: ttnpb.APIKey{
-					ID:     id,
-					Name:   name,
-					Rights: rights,
+					ID:        id,
+					Name:      name,
+					Rights:    rights,
+					ExpiresAt: &expiryDate,
 				},
 			})
 			if err != nil {
@@ -386,6 +392,7 @@ func init() {
 	organizationAPIKeysUpdate.Flags().String("api-key-id", "", "")
 	organizationAPIKeysUpdate.Flags().String("name", "", "")
 	organizationAPIKeysUpdate.Flags().AddFlagSet(organizationRightsFlags)
+	organizationAPIKeysUpdate.Flags().String("api-key-expiry", "", "API key expiry date (YYYY-MM-DD:HH:mm)")
 	organizationAPIKeys.AddCommand(organizationAPIKeysUpdate)
 	organizationAPIKeysDelete.Flags().String("api-key-id", "", "")
 	organizationAPIKeys.AddCommand(organizationAPIKeysDelete)
