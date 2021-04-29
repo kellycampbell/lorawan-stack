@@ -44,8 +44,8 @@ func GenerateAPIKey(ctx context.Context, name string, expiresAt *time.Time, righ
 	if err != nil {
 		return nil, "", err
 	}
-	// Check that expiry date passed is not a zero time or nil value
-	if expiresAt != nil && !expiresAt.IsZero() {
+	// Check that expiry date passed is not a nil value
+	if expiresAt != nil {
 		key = &ttnpb.APIKey{
 			ID:        generatedID,
 			Key:       hashedKey,
