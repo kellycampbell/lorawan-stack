@@ -138,23 +138,41 @@ func getAPIKeyID(flagSet *pflag.FlagSet, args []string, i int) string {
 	return apiKeyID
 }
 
-func getAPIKeyExpiry(flagSet *pflag.FlagSet) (time.Time, error) {
+func getAPIKeyExpiry(flagSet *pflag.FlagSet) (*time.Time, error) {
 	expiry, _ := flagSet.GetString("api-key-expiry")
-	var expiryDate time.Time
 	if expiry != "" {
 		t := time.Now()
 		zone, _ := t.Zone()
 
 		expiryDate, err := time.Parse("2006-01-02:15:04 MST", fmt.Sprintf("%s %s", expiry, zone))
 		if err != nil {
-			return expiryDate, errInvalidDateFormat
+			return nil, errInvalidDateFormat
 		}
 		if expiryDate.Before(time.Now()) {
-			return expiryDate, errExpiryDateInPast
+			return nil, errExpiryDateInPast
 		}
-		return expiryDate, nil
+		return &expiryDate, nil
 	}
-	return expiryDate, nil
+	return nil, nil
+}
+
+func getAPIKeyFields(flagSet *pflag.FlagSet) ([]ttnpb.Right, *time.Time, []string, error) {
+	rights := getRights(flagSet)
+	paths := []string{}
+	if len(rights) > 0 {
+		paths = append(paths, "rights")
+	}
+	expiryDate, err := getAPIKeyExpiry(flagSet)
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	if flagSet.Changed("api-key-expiry") {
+		paths = append(paths, "expires_at")
+	}
+	if flagSet.Changed("name") {
+		paths = append(paths, "name")
+	}
+	return rights, expiryDate, paths, nil
 }
 
 var searchFlags = func() *pflag.FlagSet {
