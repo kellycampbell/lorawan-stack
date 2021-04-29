@@ -16500,6 +16500,10 @@
         },
         "api_key": {
           "$ref": "#/definitions/v3APIKey"
+        },
+        "field_mask": {
+          "$ref": "#/definitions/protobufFieldMask",
+          "description": "The names of the gateway fields that should be updated."
         }
       }
     },
@@ -16547,6 +16551,10 @@
         },
         "api_key": {
           "$ref": "#/definitions/v3APIKey"
+        },
+        "field_mask": {
+          "$ref": "#/definitions/protobufFieldMask",
+          "description": "The names of the gateway fields that should be updated."
         }
       }
     },
@@ -16570,6 +16578,10 @@
         },
         "api_key": {
           "$ref": "#/definitions/v3APIKey"
+        },
+        "field_mask": {
+          "$ref": "#/definitions/protobufFieldMask",
+          "description": "The names of the gateway fields that should be updated."
         }
       }
     },
@@ -16593,6 +16605,10 @@
         },
         "api_key": {
           "$ref": "#/definitions/v3APIKey"
+        },
+        "field_mask": {
+          "$ref": "#/definitions/protobufFieldMask",
+          "description": "The names of the gateway fields that should be updated."
         }
       }
     },

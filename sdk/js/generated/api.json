@@ -782,6 +782,16 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "field_mask",
+              "description": "The names of the gateway fields that should be updated.",
+              "label": "",
+              "type": "FieldMask",
+              "longType": "google.protobuf.FieldMask",
+              "fullType": "google.protobuf.FieldMask",
+              "ismap": false,
+              "defaultValue": ""
             }
           ]
         },
@@ -15723,6 +15733,16 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "field_mask",
+              "description": "The names of the gateway fields that should be updated.",
+              "label": "",
+              "type": "FieldMask",
+              "longType": "google.protobuf.FieldMask",
+              "fullType": "google.protobuf.FieldMask",
+              "ismap": false,
+              "defaultValue": ""
             }
           ]
         },
@@ -27698,6 +27718,16 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "field_mask",
+              "description": "The names of the gateway fields that should be updated.",
+              "label": "",
+              "type": "FieldMask",
+              "longType": "google.protobuf.FieldMask",
+              "fullType": "google.protobuf.FieldMask",
+              "ismap": false,
+              "defaultValue": ""
             }
           ]
         },
@@ -32752,6 +32782,16 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "field_mask",
+              "description": "The names of the gateway fields that should be updated.",
+              "label": "",
+              "type": "FieldMask",
+              "longType": "google.protobuf.FieldMask",
+              "fullType": "google.protobuf.FieldMask",
+              "ismap": false,
+              "defaultValue": ""
             }
           ]
         },

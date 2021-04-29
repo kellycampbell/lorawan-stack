@@ -751,6 +751,7 @@ Application is the message that defines an Application in the network.
 | ----- | ---- | ----- | ----------- |
 | `application_ids` | [`ApplicationIdentifiers`](#ttn.lorawan.v3.ApplicationIdentifiers) |  |  |
 | `api_key` | [`APIKey`](#ttn.lorawan.v3.APIKey) |  |  |
+| `field_mask` | [`google.protobuf.FieldMask`](#google.protobuf.FieldMask) |  | The names of the gateway fields that should be updated. |
 
 #### Field Rules
 
@@ -3857,6 +3858,7 @@ Identifies an end device model with version information.
 | ----- | ---- | ----- | ----------- |
 | `gateway_ids` | [`GatewayIdentifiers`](#ttn.lorawan.v3.GatewayIdentifiers) |  |  |
 | `api_key` | [`APIKey`](#ttn.lorawan.v3.APIKey) |  |  |
+| `field_mask` | [`google.protobuf.FieldMask`](#google.protobuf.FieldMask) |  | The names of the gateway fields that should be updated. |
 
 #### Field Rules
 
@@ -6677,6 +6679,7 @@ is used to manage OAuth client authorizations for users.
 | ----- | ---- | ----- | ----------- |
 | `organization_ids` | [`OrganizationIdentifiers`](#ttn.lorawan.v3.OrganizationIdentifiers) |  |  |
 | `api_key` | [`APIKey`](#ttn.lorawan.v3.APIKey) |  |  |
+| `field_mask` | [`google.protobuf.FieldMask`](#google.protobuf.FieldMask) |  | The names of the gateway fields that should be updated. |
 
 #### Field Rules
 
@@ -7773,6 +7776,7 @@ Secret contains a secret value. It also contains the ID of the Encryption key us
 | ----- | ---- | ----- | ----------- |
 | `user_ids` | [`UserIdentifiers`](#ttn.lorawan.v3.UserIdentifiers) |  |  |
 | `api_key` | [`APIKey`](#ttn.lorawan.v3.APIKey) |  |  |
+| `field_mask` | [`google.protobuf.FieldMask`](#google.protobuf.FieldMask) |  | The names of the gateway fields that should be updated. |
 
 #### Field Rules
 

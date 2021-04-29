@@ -153,11 +153,13 @@ var UpdateApplicationAPIKeyRequestFieldPathsNested = []string{
 	"api_key.updated_at",
 	"application_ids",
 	"application_ids.application_id",
+	"field_mask",
 }
 
 var UpdateApplicationAPIKeyRequestFieldPathsTopLevel = []string{
 	"api_key",
 	"application_ids",
+	"field_mask",
 }
 var ListApplicationCollaboratorsRequestFieldPathsNested = []string{
 	"application_ids",

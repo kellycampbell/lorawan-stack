@@ -365,6 +365,7 @@ var UpdateGatewayAPIKeyRequestFieldPathsNested = []string{
 	"api_key.name",
 	"api_key.rights",
 	"api_key.updated_at",
+	"field_mask",
 	"gateway_ids",
 	"gateway_ids.eui",
 	"gateway_ids.gateway_id",
@@ -372,6 +373,7 @@ var UpdateGatewayAPIKeyRequestFieldPathsNested = []string{
 
 var UpdateGatewayAPIKeyRequestFieldPathsTopLevel = []string{
 	"api_key",
+	"field_mask",
 	"gateway_ids",
 }
 var ListGatewayCollaboratorsRequestFieldPathsNested = []string{

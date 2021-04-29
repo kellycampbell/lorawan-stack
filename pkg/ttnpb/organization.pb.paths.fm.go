@@ -151,12 +151,14 @@ var UpdateOrganizationAPIKeyRequestFieldPathsNested = []string{
 	"api_key.name",
 	"api_key.rights",
 	"api_key.updated_at",
+	"field_mask",
 	"organization_ids",
 	"organization_ids.organization_id",
 }
 
 var UpdateOrganizationAPIKeyRequestFieldPathsTopLevel = []string{
 	"api_key",
+	"field_mask",
 	"organization_ids",
 }
 var ListOrganizationCollaboratorsRequestFieldPathsNested = []string{
