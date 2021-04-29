@@ -179,7 +179,7 @@ func (is *IdentityServer) updateGatewayAPIKey(ctx context.Context, req *ttnpb.Up
 			}
 		}
 
-		key, err = store.GetAPIKeyStore(db).UpdateAPIKey(ctx, req.GatewayIdentifiers.GetEntityIdentifiers(), &req.APIKey)
+		key, err = store.GetAPIKeyStore(db).UpdateAPIKey(ctx, req.GatewayIdentifiers.GetEntityIdentifiers(), &req.APIKey, &req.FieldMask)
 		return err
 	})
 	if err != nil {

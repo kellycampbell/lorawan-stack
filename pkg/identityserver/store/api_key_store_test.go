@@ -20,6 +20,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/gogo/protobuf/types"
 	"github.com/jinzhu/gorm"
 	"github.com/smartystreets/assertions"
 	"github.com/smartystreets/assertions/should"
@@ -120,7 +121,8 @@ func TestAPIKeyStore(t *testing.T) {
 					ID:     strings.ToUpper(fmt.Sprintf("%sKEYID", tt.Name)),
 					Name:   fmt.Sprintf("Updated %s API key", tt.Name),
 					Rights: tt.Rights,
-				})
+				},
+					&types.FieldMask{Paths: []string{"rights", "name"}})
 
 				a.So(err, should.BeNil)
 
@@ -136,8 +138,9 @@ func TestAPIKeyStore(t *testing.T) {
 
 				updated, err = store.UpdateAPIKey(ctx, tt.Identifiers, &ttnpb.APIKey{
 					ID: strings.ToUpper(fmt.Sprintf("%sKEYID", tt.Name)),
-					// Empty rights
-				})
+					// Empty rights,
+				},
+					&types.FieldMask{Paths: []string{"rights"}})
 
 				a.So(err, should.BeNil)
 				a.So(updated, should.BeNil)
