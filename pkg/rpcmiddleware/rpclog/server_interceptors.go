@@ -19,6 +19,7 @@ import (
 	"time"
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
+	"go.thethings.network/lorawan-stack/v3/pkg/errors"
 	"go.thethings.network/lorawan-stack/v3/pkg/log"
 	"google.golang.org/grpc"
 )
@@ -40,6 +41,9 @@ func UnaryServerInterceptor(ctx context.Context, opts ...Option) grpc.UnaryServe
 			if _, ok := o.ignoreMethods[info.FullMethod]; ok {
 				return resp, err
 			}
+		}
+		if errors.IsResourceExhausted(err) {
+			return resp, err
 		}
 
 		onceFields = onceFields.WithField(
@@ -88,6 +92,9 @@ func StreamServerInterceptor(ctx context.Context, opts ...Option) grpc.StreamSer
 			if _, ok := o.ignoreMethods[info.FullMethod]; ok {
 				return err
 			}
+		}
+		if errors.IsResourceExhausted(err) {
+			return err
 		}
 
 		onceFields = onceFields.WithField(

@@ -18,6 +18,7 @@ import (
 	"context"
 	"time"
 
+	"go.thethings.network/lorawan-stack/v3/pkg/errors"
 	"go.thethings.network/lorawan-stack/v3/pkg/log"
 	"google.golang.org/grpc"
 )
@@ -33,6 +34,9 @@ func UnaryClientInterceptor(ctx context.Context, opts ...Option) grpc.UnaryClien
 
 		startTime := time.Now()
 		err := invoker(newCtx, method, req, reply, cc, opts...)
+		if errors.IsResourceExhausted(err) {
+			return err
+		}
 
 		onceFields = onceFields.WithField(
 			"duration", time.Since(startTime).Round(time.Microsecond*100),

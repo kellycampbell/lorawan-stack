@@ -59,6 +59,9 @@ func Log(logger log.Interface, ignorePathsArray []string) MiddlewareFunc {
 					return
 				}
 			}
+			if metrics.Code == http.StatusTooManyRequests {
+				return
+			}
 
 			logFields = logFields.With(map[string]interface{}{
 				"http.status": metrics.Code,
