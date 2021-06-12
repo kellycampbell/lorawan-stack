@@ -33,7 +33,11 @@ func NewZap(encoding string) (Handler, error) {
 		ErrorOutputPaths: []string{"stderr"},
 	}
 	config.DisableCaller = true       // omit caller from log message.
-	config.EncoderConfig.TimeKey = "" // omit timestamp from log message.
+	//config.EncoderConfig.TimeKey = "" // omit timestamp from log message.
+	config.EncoderConfig.MessageKey = "message"
+	config.EncoderConfig.TimeKey = "@timestamp"
+	config.EncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
+	config.EncoderConfig.EncodeDuration = zapcore.MillisDurationEncoder
 	if encoding == "console" {
 		config.EncoderConfig.EncodeLevel = zapcore.CapitalLevelEncoder
 		colorterm, _ := strconv.ParseBool(os.Getenv("COLORTERM"))

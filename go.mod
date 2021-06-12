@@ -128,7 +128,7 @@ require (
 	go.packetbroker.org/api/v3 v3.10.7-tts
 	go.thethings.network/lorawan-application-payload v0.0.0-20210625082552-27377194bcca
 	go.thethings.network/lorawan-stack-legacy/v2 v2.0.2
-	go.uber.org/zap v1.13.0
+	go.uber.org/zap v1.17.0
 	gocloud.dev v0.20.0
 	gocloud.dev/pubsub/natspubsub v0.19.0
 	golang.org/x/crypto v0.0.0-20210503195802-e9a32991a82e
