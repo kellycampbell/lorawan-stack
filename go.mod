@@ -151,7 +151,6 @@ require (
 	cloud.google.com/go v0.81.0 // indirect
 	cloud.google.com/go/pubsub v1.3.1 // indirect
 	cloud.google.com/go/storage v1.10.0 // indirect
-	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/RoaringBitmap/roaring v0.4.23 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/blevesearch/go-porterstemmer v1.0.3 // indirect
@@ -218,9 +217,8 @@ require (
 	github.com/willf/bitset v1.1.10 // indirect
 	go.etcd.io/bbolt v1.3.5 // indirect
 	go.opentelemetry.io/otel v0.14.0 // indirect
-	go.uber.org/atomic v1.5.0 // indirect
-	go.uber.org/multierr v1.3.0 // indirect
-	go.uber.org/tools v0.0.0-20190618225709-2cfd321de3ee // indirect
+	go.uber.org/atomic v1.7.0 // indirect
+	go.uber.org/multierr v1.6.0 // indirect
 	golang.org/x/image v0.0.0-20191009234506-e7c1f5e7dbb8 // indirect
 	golang.org/x/lint v0.0.0-20201208152925-83fdc39ff7b5 // indirect
 	golang.org/x/mod v0.4.1 // indirect
@@ -233,5 +231,4 @@ require (
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/ini.v1 v1.51.1 // indirect
-	honnef.co/go/tools v0.0.1-2020.1.4 // indirect
 )
