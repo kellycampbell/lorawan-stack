@@ -12437,10 +12437,10 @@ react-focus-lock@^2.1.0:
     use-callback-ref "^1.2.1"
     use-sidecar "^1.0.1"
 
-react-grid-system@^7.1.1:
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-7.1.2.tgz#5fa8e17a61f2f3ec0380402918c129c968e1e947"
-  integrity sha512-5XKVkevZWDITlpivmK8iQcmdfj7cuIzPlcejOmhRK9FGdNsFsRHXO2H7zaKfssJ2CymQXOTvU0ZN8TX9BPBr+g==
+react-grid-system@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-8.0.1.tgz#ec237aeb951438bd4bb72aa63eb99cf0d1503a23"
+  integrity sha512-2asxMDYCMDf3Ti/4+mdxPayyZkxcgVouBNKNOFBC26vXYGGLNAK6TguRCJUfvziiKbZ6tDSZ9UXUM2c0dreIyw==
   dependencies:
     prop-types "^15.7.2"
 
@@ -14822,7 +14822,7 @@ tsutils@^3.17.1:
     tslib "^1.8.1"
 
 "ttn-lw@file:sdk/js":
-  version "3.15.0"
+  version "3.15.1"
   dependencies:
     arraybuffer-to-string "^1.0.2"
     axios "^0.21.1"
